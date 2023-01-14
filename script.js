@@ -38,3 +38,8 @@ form.addEventListener("submit", function(event) {
   previous.append(previousGuessEntry);
 
 });
+
+// Additional practice
+// Use functions to introduce rounds
+// Have "lives" and display them on the webpage
+// When you win, change the background to green and when you lose, change the background to red
