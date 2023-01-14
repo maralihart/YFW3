@@ -1,29 +1,40 @@
-// 1. Create a constant variable called answer that is assigned to a number of your choosing
-const answer = 50;
+// Generate a random number between 1 and 100
+const answer = Math.floor(Math.random() * 100) + 1;
 
-// Bonus: Instead of 1, generate a random number between 1 and 100
-// var randomNumber = Math.floor(Math.random() * 100) + 1;
+// Get a reference to the form and the message element
+const form = document.querySelector("form");
+const message = document.querySelector("#message");
 
-// Get the user's guess
-let guess = prompt('Enter your guess:');
+// BONUS: Reference the previous element
+const previous = document.querySelector("#previous");
 
-// Convert the guess to a number
-// All prompt() returns text (or string) which is not the same type as number so ("10" === 10 is false) aka ("10" is not equal to 10) or ("10 " !== 10 is true)
-guess = Number(guess);
+// Add a submit event listener to the form
+form.addEventListener("submit", function(event) {
+  // Prevent the form from being submitted
+  event.preventDefault();
 
-// Keep looping until the guess is correct
-// While the guess is not the same as the answer
-while (guess !== answer) {
-  // Check if the guess is too high or too low and get new guess
+  // Get the user"s guess
+  let guess = Number(form.guess.value);
+
+  // BONUS: Create a list item element that will go into a list so user can see previous choices. Call it previousGuessEntry
+  const previousGuessEntry = document.createElement("li");
+
+  // Check if the guess is too high, too low, or correct ("Try lower", "Try higher", "You got it!")
+  // Change the message.textContent to the appropriate message
+  // BONUS: Change the previousGuessEntry.textContent to give information about guess
+
   if (guess > answer) {
-    guess = prompt('Try a lower number');
+    message.textContent = "Try a lower number.";
+    previousGuessEntry.textContent = "It's lower than " + guess + ".";
+  } else if (guess < answer) {
+    message.textContent = "Try a higher number.";
+    previousGuessEntry.textContent = "It's higher than " + guess + ".";
   } else {
-    guess = prompt('Try a higher number');
+    message.textContent = "Congratulations, you guessed the correct number: " + answer + "!";
+    previousGuessEntry.textContent = "It was " + answer + "!";
   }
 
-  // Convert the guess to a number
-  guess = Number(guess);
-}
+  // Append previousGuessEntry to previous to add the list item under the unordered list
+  previous.append(previousGuessEntry);
 
-// If the loop has exited, the guess must be correct
-alert('Congratulations, you guessed the correct number!');
+});
